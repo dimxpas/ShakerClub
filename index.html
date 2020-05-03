@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- <meta charset="UTF-8"><meta http-equiv="Content-type" content="text/html; charset=utf-8"/> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="src/css/style.css">
+
+    <title>ShakerClub</title>
+  </head>
+  <body>
+    <!-- header -->
+    <div class="row header">
+      <div class="col-lg-2 logo-header pt-2 pb-2">
+        <a href="index.html"><img src="src/img/logo-t.PNG" width="130" height="130"></a>
+      </div>
+      <div class="col-lg-8">
+        <h1 class="title pt-2"><a href="index.html">SHAKER CLUB</a></h1>
+        <p>The best cocktails are here !</p>
+      </div>
+      <div class="col-lg-2 pb-2 search-header">
+        <p class="search mt-4">Search</p>
+        <input type="text" id="search_cocktail" size="15">
+        <button class="btn-light" onclick="searchCocktail()"><img src="src/img/loupe.png" width="20px"></button>
+      </div>
+    </div>
+
+    <!-- Cocktails -->
+    <div class="popular">
+      <h2 class='mt-3 popular-title'>The most Popular Cocktails</h2>
+      <!-- nav -->
+      <div class="row">
+        <div class="col-md-4 nav-cocktails" id="classics_cocktails">The Classics</div>
+        <div class="col-md-4 nav-cocktails" id="exotics_cocktails">The Exotics</div>
+        <div class="col-md-4 nav-cocktails" id="discovers_cocktails">To Discover</div>
+      </div>
+      <!-- classics -->
+      <div class="row mt-3" id="cocktails_classics">
+        <div class="col-xs-6 col-lg-4" id="margarita">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+        <div class="col-xs-6 col-lg-4" id="mojito">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+        <div class="col-xs-6 col-lg-4" id="daiquiri">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+      </div>
+      <!-- exotics -->
+      <div class="row mt-3" id="cocktails_exotics">
+        <div class="col-xs-6 col-lg-4" id="pinaColada">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+        <div class="col-xs-6 col-lg-4" id="maiTai">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+        <div class="col-xs-6 col-lg-4" id="longIsland">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+      </div>
+      <!-- others -->
+      <div class="row mt-3" id="cocktails_discover">
+        <div class="col-xs-6 col-lg-4" id="mintJulep">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+        <div class="col-xs-6 col-lg-4" id="moscowMule">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+        <div class="col-xs-6 col-lg-4" id="cosmopolitan">
+          <img src="" width='250' height='250'>
+          <p class='cockatil_name'></p>
+        </div>
+      </div>
+    </div> 
+
+    <!-- Alcohol -->
+    <div class="popular-alcohol">
+      <h2 class='mt-3 popular-title'>The most Popular Alcohol</h2>
+      <div class="row mt-3" id="alcohol_classic">
+        <div class="col-xs-6 col-lg-3" id="vodka" onclick="searchAlcohol(this.id)">
+          <img src="https://www.thecocktaildb.com/images/ingredients/vodka.png" height='250'>
+          <p class='alcohol_name'>Vodka</p>
+        </div>
+        <div class="col-xs-6 col-lg-3" id="rum" onclick="searchAlcohol(this.id)">
+          <img src="https://www.thecocktaildb.com/images/ingredients/rum.png" height='250'>
+          <p class='alcohol_name'>Rum</p>
+        </div>
+        <div class="col-xs-6 col-lg-3" id="tequila" onclick="searchAlcohol(this.id)">
+          <img src="https://www.thecocktaildb.com/images/ingredients/tequila.png" height='250'>
+          <p class='alcohol_name'>Tequila</p>
+        </div>
+        <div class="col-xs-6 col-lg-3" id="gin" onclick="searchAlcohol(this.id)">
+          <img src="https://www.thecocktaildb.com/images/ingredients/gin.png" height='250'>
+          <p class='alcohol_name'>Gin</p>
+        </div>
+      </div>
+    </div> 
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      // Search
+      function searchCocktail() {
+        search = $("#search_cocktail").val();
+        window.location.href = "search-cocktail.html?name="+search;
+      };
+      $('#search_cocktail').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        search = $("#search_cocktail").val();
+        if(keycode == '13') {
+          window.location.href = "search-cocktail.html?name="+search;
+        }
+      });
+      // nav interactions
+      $("#classics_cocktails").css({'background-color':'#ffffff', 'color':'black'});
+      $("#cocktails_exotics").css({'display':'none'});
+      $("#cocktails_discover").css({'display':'none'});
+
+      $("#classics_cocktails").on("click", function() {
+        $("#classics_cocktails").css({'background-color':'#ffffff', 'color':'black'});
+        $("#discovers_cocktails").css({'background-color':'#ffffff00', 'color':'#ffffff'});
+        $("#exotics_cocktails").css({'background-color':'#ffffff00', 'color':'#ffffff'});
+        $("#cocktails_classics").css({'display':'flex'});
+        $("#cocktails_exotics").css({'display':'none'});
+        $("#cocktails_discover").css({'display':'none'});
+      });
+      $("#exotics_cocktails").on("click", function() {
+        $("#exotics_cocktails").css({'background-color':'#ffffff', 'color':'black'});
+        $("#discovers_cocktails").css({'background-color':'#ffffff00', 'color':'#ffffff'});
+        $("#classics_cocktails").css({'background-color':'#ffffff00', 'color':'#ffffff'});
+        $("#cocktails_exotics").css({'display':'flex'});
+        $("#cocktails_classics").css({'display':'none'});
+        $("#cocktails_discover").css({'display':'none'});
+      });
+      $("#discovers_cocktails").on("click", function() {
+        $("#discovers_cocktails").css({'background-color':'#ffffff', 'color':'black'});
+        $("#exotics_cocktails").css({'background-color':'#ffffff00', 'color':'#ffffff'});
+        $("#classics_cocktails").css({'background-color':'#ffffff00', 'color':'#ffffff'});
+        $("#cocktails_discover").css({'display':'flex'});
+        $("#cocktails_exotics").css({'display':'none'});
+        $("#cocktails_classics").css({'display':'none'});
+      });
+
+      // date
+      var fullDate = new Date();
+      console.log(fullDate);
+
+      $("img").css("filter", "grayscale(1)");
+      $(".logo-header img").css("filter", "none");
+      $("div.col-lg-4, div.col-lg-3").css("cursor", "pointer");
+      $('div.col-lg-4, div.col-lg-3').hover(function() {
+        $("img").css("filter", "grayscale(1)");
+        $(this).find('img').css("filter", "none");
+        $(".logo-header img").css("filter", "none");
+      });
+
+      url_cocktail = "cocktail.html?id=";
+      // CLASSIC COCKTAILS
+      // margarita
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_margarita){
+          console.log(json_margarita);
+          id_margarita = json_margarita.drinks[0].idDrink;
+          img_margarita = json_margarita.drinks[0].strDrinkThumb;
+          name_margarita = json_margarita.drinks[0].strDrink;
+          $('#margarita img').attr("src", img_margarita);
+          $('#margarita p').html(name_margarita);
+          $('#margarita').on("click", function() {
+            window.location.href = url_cocktail+id_margarita;
+          });
+        }
+      });
+      // mojito
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11000',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_mojito){
+          id_mojito = json_mojito.drinks[0].idDrink;
+          img_mojito = json_mojito.drinks[0].strDrinkThumb;
+          name_mojito = json_mojito.drinks[0].strDrink;
+          $('#mojito img').attr("src", img_mojito);
+          $('#mojito p').html(name_mojito);
+          $('#mojito').on("click", function() {
+            window.location.href = url_cocktail+id_mojito;
+          });
+        }
+      });
+      // daiquiri
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11006',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_daiquiri){
+          id_daiquiri = json_daiquiri.drinks[0].idDrink;
+          img_daiquiri = json_daiquiri.drinks[0].strDrinkThumb;
+          name_daiquiri = json_daiquiri.drinks[0].strDrink;
+          $('#daiquiri img').attr("src", img_daiquiri);
+          $('#daiquiri p').html(name_daiquiri);
+          $('#daiquiri').on("click", function() {
+            window.location.href = url_cocktail+id_daiquiri;
+          });
+        }
+      });
+      // EXOTICS COCKTAILS
+      // pinaColada
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=17207',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_pinaColada){
+          id_pinaColada = json_pinaColada.drinks[0].idDrink;
+          img_pinaColada = json_pinaColada.drinks[0].strDrinkThumb;
+          name_pinaColada = json_pinaColada.drinks[0].strDrink;
+          $('#pinaColada img').attr("src", img_pinaColada);
+          $('#pinaColada p').html(name_pinaColada);
+          $('#pinaColada').on("click", function() {
+            window.location.href = url_cocktail+id_pinaColada;
+          });
+        }
+      });
+      // long island iced tea
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=17204',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_longIsland){
+          id_longIsland = json_longIsland.drinks[0].idDrink;
+          img_longIsland = json_longIsland.drinks[0].strDrinkThumb;
+          name_longIsland = json_longIsland.drinks[0].strDrink;
+          $('#longIsland img').attr("src", img_longIsland);
+          $('#longIsland p').html(name_longIsland);
+          $('#longIsland').on("click", function() {
+            window.location.href = url_cocktail+id_longIsland;
+          });
+        }
+      });
+      // mai tai
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11690',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_maiTai){
+          id_maiTai = json_maiTai.drinks[0].idDrink;
+          img_maiTai = json_maiTai.drinks[0].strDrinkThumb;
+          name_maiTai = json_maiTai.drinks[0].strDrink;
+          $('#maiTai img').attr("src", img_maiTai);
+          $('#maiTai p').html(name_maiTai);
+          $('#maiTai').on("click", function() {
+            window.location.href = url_cocktail+id_maiTai;
+          });
+        }
+      });
+      // DICOVERS COCKTAILS
+      // mint julep
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=17206',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_mintJulep){
+          id_mintJulep = json_mintJulep.drinks[0].idDrink;
+          img_mintJulep = json_mintJulep.drinks[0].strDrinkThumb;
+          name_mintJulep = json_mintJulep.drinks[0].strDrink;
+          $('#mintJulep img').attr("src", img_mintJulep);
+          $('#mintJulep p').html(name_mintJulep);
+          $('#mintJulep').on("click", function() {
+            window.location.href = url_cocktail+id_mintJulep;
+          });
+        }
+      });
+      // moscow mule
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11009',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_moscowMule){
+          id_moscowMule = json_moscowMule.drinks[0].idDrink;
+          img_moscowMule = json_moscowMule.drinks[0].strDrinkThumb;
+          name_moscowMule = json_moscowMule.drinks[0].strDrink;
+          $('#moscowMule img').attr("src", img_moscowMule);
+          $('#moscowMule p').html(name_moscowMule);
+          $('#moscowMule').on("click", function() {
+            window.location.href = url_cocktail+id_moscowMule;
+          });
+        }
+      });
+      // cosmopolitan
+      $.ajax({
+        url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=17196',
+        type : 'GET',
+        dataType : 'json',
+        success : function(json_cosmopolitan){
+          id_cosmopolitan = json_cosmopolitan.drinks[0].idDrink;
+          img_cosmopolitan = json_cosmopolitan.drinks[0].strDrinkThumb;
+          name_cosmopolitan = json_cosmopolitan.drinks[0].strDrink;
+          $('#cosmopolitan img').attr("src", img_cosmopolitan);
+          $('#cosmopolitan p').html(name_cosmopolitan);
+          $('#cosmopolitan').on("click", function() {
+            window.location.href = url_cocktail+id_cosmopolitan;
+          });
+        }
+      });
+
+      // ALCOHOL
+      function searchAlcohol(idAlcohol) {
+        window.location.href = "search-alcohol.html?name="+idAlcohol;
+      }
+    </script>
+  </body> 
+</html>

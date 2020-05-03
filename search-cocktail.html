@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <!-- <meta charset="UTF-8"><meta http-equiv="Content-type" content="text/html; charset=utf-8"/> -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="src/css/style.css">
+
+        <title>ShakerClub</title>
+    </head>
+    <body>
+        <!-- header -->
+        <div class="row header">
+            <div class="col-lg-2 logo-header pt-2 pb-2">
+                <a href="index.html"><img src="src/img/logo-t.PNG" width="130" height="130"></a>
+            </div>
+            <div class="col-lg-8">
+                <h1 class="title pt-2"><a href="index.html">SHAKER CLUB</a></h1>
+                <p>The best cocktails are here !</p>  
+            </div>
+            <div class="col-lg-2 pb-2 search-header">
+                <p class="search mt-4">Search</p>
+                <input type="text" id="search_cocktail" size="15">
+                <button class="btn-light" onclick="searchCocktail()"><img src="src/img/loupe.png" width="20px"></button>
+            </div>
+        </div>
+
+        <!-- cocktail -->
+        <h2 class="title2 mt-4 mb-4" id="name_search"></h2>
+        <div class="row mt-4 mb-4" id="list_search">
+            <!-- list of cocktails -->
+        </div>
+        
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        // Search
+        function searchCocktail() {
+            search = $("#search_cocktail").val();
+            window.location.href = "search-cocktail.html?name="+search;
+        };
+        $('#search_cocktail').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            search = $("#search_cocktail").val();
+            if(keycode == '13') {
+            window.location.href = "search-cocktail.html?name="+search;
+            }
+        });
+        // url
+        var url = window.location.href;
+        var name = url.split('?name=')[1];
+        if (name.indexOf('%20') > 0){
+            var nameTitle = name.split('%20')[0]+" "+name.split('%20')[1];
+        } else {
+            var nameTitle = name;
+        }
+        $("#name_search").html(nameTitle+"'s cocktails");
+        // get list of coctails
+        $.ajax({
+            url : 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='+name,
+            type : 'GET',
+            dataType : 'json',
+            success : function(json){
+                console.log(json);
+                if (json.drinks == null){
+                    $("#list_search").append("Sorry. No Cocktails Found.");
+                }
+                a = 0;
+                while (a < 20)
+                {
+                    img = json.drinks[a].strDrinkThumb;
+                    name = json.drinks[a].strDrink;
+                    id = json.drinks[a].idDrink;
+                    $("#list_search").append("<div class='col-sm-6 col-md-4' id='"+id+"' onclick='redirectCocktail(this.id)'><img src='"+img+"' width='250' height='250'><p class='cockatil_name'>"+name+"</p></div>");
+                    // <a href='cocktail.html?id="+id+"'></a>
+                    a++;
+                }
+            }
+        });
+
+        function redirectCocktail(idCocktail) {
+            window.location.href = "cocktail.html?id="+idCocktail;
+        }
+
+        $("img").css("filter", "grayscale(1)");
+        $(".logo-header img").css("filter", "none");
+        $("div.col-lg-4").css("cursor", "pointer");
+        $('div.col-lg-4').hover(function() {
+            $("img").css("filter", "grayscale(1)");
+            $(this).find('img').css("filter", "none");
+            $(".logo-header img").css("filter", "none");
+        });
+
+        // } else {
+        //     $("#name_cocktail").html('Error. The cocktail details cannot be loaded !')
+        // }
+    
+    </script>
+</body>
+</html>

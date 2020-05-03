@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <!-- <meta charset="UTF-8"><meta http-equiv="Content-type" content="text/html; charset=utf-8"/> -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="src/css/style.css">
+
+        <title>ShakerClub</title>
+    </head>
+    <body>
+        <!-- header -->
+        <div class="row header">
+            <div class="col-lg-2 logo-header pt-2 pb-2">
+                <a href="index.html"><img src="src/img/logo-t.PNG" width="130" height="130"></a>
+            </div>
+            <div class="col-lg-8">
+                <h1 class="title pt-2"><a href="index.html">SHAKER CLUB</a></h1>
+                <p>The best cocktails are here !</p>
+            </div>
+            <div class="col-lg-2 pb-2 search-header">
+                <p class="search mt-4">Search</p>
+                <input type="text" id="search_cocktail" size="15">
+                <button class="btn-light" onclick="searchCocktail()"><img src="src/img/loupe.png" width="20px"></button>
+            </div>
+        </div>
+
+        <!-- cocktail -->
+        <h2 class="title2 mt-4 mb-4" id="name_cocktail"></h2>
+        <div class="row mt-4 mb-4">
+            <div class="col-md-4 mb-4">
+                <img id="img_cocktail" src="" width="320">
+            </div>
+            <div class="col-md-8">
+                <h3>Ingredients</h3>
+                <div class="row" id="ingredients_cocktail"></div>
+                <h3>Instructions</h3>
+                <div class="row" id="instructions_cocktail"></div>
+            </div>
+        </div>
+        
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        // Search
+        function searchCocktail() {
+                search = $("#search_cocktail").val();
+                window.location.href = "search-cocktail.html?name="+search;
+            };
+            $('#search_cocktail').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                search = $("#search_cocktail").val();
+                if(keycode == '13') {
+                window.location.href = "search-cocktail.html?name="+search;
+                }
+            });
+        var url = window.location.href;
+        var id = url.split('?id=')[1];
+        if (id > 0)
+        {
+            $.ajax({
+                url : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i='+id,
+                type : 'GET',
+                dataType : 'json',
+                success : function(json){
+                    console.log(json);
+                    img = json.drinks[0].strDrinkThumb;
+                    name = json.drinks[0].strDrink;
+                    instruction = json.drinks[0].strInstructions;
+                    $('#img_cocktail').attr("src", img);
+                    $('#name_cocktail').html(name);
+                    $('#instructions_cocktail').html(instruction);
+                    // Ingredient 1
+                    ingredient1 = json.drinks[0].strIngredient1;
+                    dose1 = json.drinks[0].strMeasure1;
+                    img1 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient1+".png";
+                    if (ingredient1 != null)
+                    {
+                        if (dose1 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img1+"' width='130' height='130'><p>"+dose1+" "+ingredient1+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img1+"' width='130' height='130'><p>"+ingredient1+"</p></div>");
+                        }
+                    }
+                    // Ingredient 2
+                    ingredient2 = json.drinks[0].strIngredient2;
+                    dose2 = json.drinks[0].strMeasure2;
+                    img2 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient2+".png";
+                    if (ingredient2 != null)
+                    {
+                        if (dose2 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img2+"' width='130' height='130'><p>"+dose2+" "+ingredient2+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img2+"' width='130' height='130'><p>"+ingredient2+"</p></div>");
+                        }
+                    }
+                    // Ingredient 3
+                    ingredient3 = json.drinks[0].strIngredient3;
+                    dose3 = json.drinks[0].strMeasure3;
+                    img3 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient3+".png";
+                    if (ingredient3 != null)
+                    {
+                        if (dose3 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img3+"' width='130' height='130'><p>"+dose3+" "+ingredient3+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img3+"' width='130' height='130'><p>"+ingredient3+"</p></div>");
+                        }
+                    }
+                    // Ingredient 4
+                    ingredient4 = json.drinks[0].strIngredient4;
+                    dose4 = json.drinks[0].strMeasure4;
+                    img4 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient4+".png";
+                    if (ingredient4 != null)
+                    {
+                        if (dose4 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img4+"' width='130' height='130'><p>"+dose4+" "+ingredient4+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img4+"' width='130' height='130'><p>"+ingredient4+"</p></div>");
+                        }
+                    }
+                    // Ingredient 5
+                    ingredient5 = json.drinks[0].strIngredient5;
+                    dose5 = json.drinks[0].strMeasure5;
+                    img5 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient5+".png";
+                    if (ingredient5 != null)
+                    {
+                        if (dose5 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img5+"' width='130' height='130'><p>"+dose5+" "+ingredient5+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img5+"' width='130' height='130'><p>"+ingredient5+"</p></div>");
+                        }
+                    }
+                    // Ingredient 6
+                    ingredient6 = json.drinks[0].strIngredient6;
+                    dose6 = json.drinks[0].strMeasure6;
+                    img6 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient6+".png";
+                    if (ingredient6 != null)
+                    {
+                        if (dose6 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img6+"' width='130' height='130'><p>"+dose6+" "+ingredient6+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img6+"' width='130' height='130'><p>"+ingredient6+"</p></div>");
+                        }
+                    }
+                    // Ingredient 7
+                    ingredient7 = json.drinks[0].strIngredient7;
+                    dose7 = json.drinks[0].strMeasure7;
+                    img7 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient7+".png";
+                    if (ingredient7 != null)
+                    {
+                        if (dose7 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img7+"' width='130' height='130'><p>"+dose7+" "+ingredient7+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img7+"' width='130' height='130'><p>"+ingredient7+"</p></div>");
+                        }
+                    }
+                    // Ingredient 8
+                    ingredient8 = json.drinks[0].strIngredient8;
+                    dose8 = json.drinks[0].strMeasure8;
+                    img8 = "https://www.thecocktaildb.com/images/ingredients/"+ingredient8+".png";
+                    if (ingredient8 != null)
+                    {
+                        if (dose8 != null)
+                        {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img8+"' width='130' height='130'><p>"+dose8+" "+ingredient8+"</p></div>");
+                        } else {
+                            $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img8+"' width='130' height='130'><p>"+ingredient8+"</p></div>");
+                        }
+                    }
+                }
+            });
+        } else {
+            $("#name_cocktail").html('Error. The cocktail details cannot be loaded !')
+        }
+    </script>
+</body>
+</html>
