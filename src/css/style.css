@@ -154,8 +154,11 @@ h2 {
         text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #3d7aca, 0 0 35px #3d7aca, 0 0 40px #3d7aca, 0 0 50px #3d7aca, 0 0 75px #3d7aca;
     }
 }
-@media screen and (max-width: 640px) {
-  body {
-    background-color: #212121;
-  }
+@media (max-width: 640px) {
+    body {
+        background-color: #212121;
+    }
+    h1 {
+        font-size: 4em;
+    }
 }
