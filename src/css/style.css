@@ -162,10 +162,4 @@ h2 {
     h1 {
         font-size: 4em;
     }
-    .logo-header {
-        border-right: none;
-    }
-    .search-header {
-        border-left: none;
-    }
 }
