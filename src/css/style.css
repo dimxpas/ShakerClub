@@ -46,10 +46,14 @@ h2 {
 }
 .title2 {
     color: #42c52e;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #42c52e, 0 0 35px #42c52e, 0 0 40px #42c52e, 0 0 50px #42c52e, 0 0 75px #42c52e;
+}
+/* .title2 {
+    color: #42c52e;
     -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
     -moz-animation: neon2 1.5s ease-in-out infinite alternate;
     animation: neon2 1.5s ease-in-out infinite alternate;
-}
+} */
 .title3 {
     color: #3d7aca;
     -webkit-animation: neon3 1.5s ease-in-out infinite alternate;
@@ -160,7 +164,10 @@ h2 {
         background-image: none;
     }
     h1 {
-        font-size: 4em;
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 1.7em;
     }
     .logo-header {
         border-right: none;
