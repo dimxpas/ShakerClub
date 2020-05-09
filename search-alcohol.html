@@ -23,9 +23,14 @@
                 <p>The best cocktails are here !</p>  
             </div>
             <div class="col-lg-2 pb-2 search-header">
-                <p class="search mt-4">Search</p>
+                <p class="search mt-4">Search by</p>
+                <label style="margin-bottom:0px">Cocktails<input type="radio" checked name="type_search" value="Cocktails" style="margin-left:5px;"></label>
+                <label>Alcohol<input type="radio" name="type_search" value="Alcohol" style="margin-left:5px;"></label><br>
                 <input type="text" id="search_cocktail" size="15">
-                <button class="btn-light" onclick="searchCocktail()"><img src="src/img/loupe.png" width="20px"></button>
+                <button class="btn-light" onclick="searchCocktail()" id="btn_cocktail"><img src="src/img/loupe.png" width="20px"></button>
+                <input type="text" id="search_alcohol" size="15">
+                <button class="btn-light" onclick="searchAlcohol()" id="btn_alcohol"><img src="src/img/loupe.png" width="20px"></button>
+              </div>
             </div>
         </div>
 
@@ -41,6 +46,17 @@
 
     <script>
         // Search
+        $("#search_alcohol, #btn_alcohol").css('display', 'none');  
+        $("[name='type_search']").on("click", function(){
+            if ($("input[name='type_search']")[0].checked == true){
+            $("#search_alcohol, #btn_alcohol").css('display', 'none');
+            $("#search_cocktail, #btn_cocktail").css('display', 'inline-block');
+            } else {
+            $("#search_cocktail, #btn_cocktail").css('display', 'none');
+            $("#search_alcohol, #btn_alcohol").css('display', 'inline-block');
+            }
+        });
+        // By Cocktails
         function searchCocktail() {
             search = $("#search_cocktail").val();
             window.location.href = "search-cocktail.html?name="+search;
@@ -52,10 +68,22 @@
             window.location.href = "search-cocktail.html?name="+search;
             }
         });
+        // By Alcohol
+        function searchCocktail() {
+            search = $("#search_alcohol").val();
+            window.location.href = "search-alcohol.html?name="+search;
+        };
+        $('#search_alcohol').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            search = $("#search_alcohol").val();
+            if(keycode == '13') {
+            window.location.href = "search-alcohol.html?name="+search;
+            }
+        });
         // url
         var url = window.location.href;
         var name = url.split('?name=')[1];
-        $("#name_search").html(name+"'s Cocktails");
+        $("#name_search").html("Cocktails with "+name);
         // get list of coctails
         $.ajax({
             url : 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i='+name,
