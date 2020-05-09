@@ -184,7 +184,7 @@
 
       // date
       var fullDate = new Date();
-      console.log(fullDate);
+      // console.log(fullDate);
 
       $("img").css("filter", "grayscale(1)");
       $(".logo-header img").css("filter", "none");
@@ -203,7 +203,7 @@
         type : 'GET',
         dataType : 'json',
         success : function(json_margarita){
-          console.log(json_margarita);
+          // console.log(json_margarita);
           id_margarita = json_margarita.drinks[0].idDrink;
           img_margarita = json_margarita.drinks[0].strDrinkThumb;
           name_margarita = json_margarita.drinks[0].strDrink;
