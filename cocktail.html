@@ -23,9 +23,14 @@
                 <p>The best cocktails are here !</p>
             </div>
             <div class="col-lg-2 pb-2 search-header">
-                <p class="search mt-4">Search</p>
+                <p class="search mt-4">Search by</p>
+                <label style="margin-bottom:0px">Cocktails<input type="radio" checked name="type_search" value="Cocktails" style="margin-left:5px;"></label>
+                <label>Alcohol<input type="radio" name="type_search" value="Alcohol" style="margin-left:5px;"></label><br>
                 <input type="text" id="search_cocktail" size="15">
-                <button class="btn-light" onclick="searchCocktail()"><img src="src/img/loupe.png" width="20px"></button>
+                <button class="btn-light" onclick="searchCocktail()" id="btn_cocktail"><img src="src/img/loupe.png" width="20px"></button>
+                <input type="text" id="search_alcohol" size="15">
+                <button class="btn-light" onclick="searchAlcohol()" id="btn_alcohol"><img src="src/img/loupe.png" width="20px"></button>
+              </div>
             </div>
         </div>
 
@@ -49,17 +54,40 @@
 
     <script>
         // Search
+        $("#search_alcohol, #btn_alcohol").css('display', 'none');  
+        $("[name='type_search']").on("click", function(){
+            if ($("input[name='type_search']")[0].checked == true){
+            $("#search_alcohol, #btn_alcohol").css('display', 'none');
+            $("#search_cocktail, #btn_cocktail").css('display', 'inline-block');
+            } else {
+            $("#search_cocktail, #btn_cocktail").css('display', 'none');
+            $("#search_alcohol, #btn_alcohol").css('display', 'inline-block');
+            }
+        });
+        // By Cocktails
         function searchCocktail() {
-                search = $("#search_cocktail").val();
-                window.location.href = "search-cocktail.html?name="+search;
-            };
-            $('#search_cocktail').keypress(function(event){
-                var keycode = (event.keyCode ? event.keyCode : event.which);
-                search = $("#search_cocktail").val();
-                if(keycode == '13') {
-                window.location.href = "search-cocktail.html?name="+search;
-                }
-            });
+            search = $("#search_cocktail").val();
+            window.location.href = "search-cocktail.html?name="+search;
+        };
+        $('#search_cocktail').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            search = $("#search_cocktail").val();
+            if(keycode == '13') {
+            window.location.href = "search-cocktail.html?name="+search;
+            }
+        });
+        // By Alcohol
+        function searchCocktail() {
+            search = $("#search_alcohol").val();
+            window.location.href = "search-alcohol.html?name="+search;
+        };
+        $('#search_alcohol').keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            search = $("#search_alcohol").val();
+            if(keycode == '13') {
+            window.location.href = "search-alcohol.html?name="+search;
+            }
+        });
         var url = window.location.href;
         var id = url.split('?id=')[1];
         if (id > 0)
@@ -84,6 +112,16 @@
                     {
                         if (dose1 != null)
                         {
+                            // if (dose1.indexOf("oz") >= 0){
+                            //     nums1 = dose1.split(' ')[0];
+                            //     if (dose1.split(' ')[0].indexOf('-') >= 0){
+                            //         dose1 = parseInt(nums1[0]) * 3+'-'+parseInt(nums1[2]) * 3+' cl';
+                            //     } else {
+                            //         num1 = parseInt(nums1) * 3;
+                            //         dose1 = num1+' cl';
+                            //     }
+                            // }
+                            dose1 = ozToCl(dose1);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img1+"' width='130' height='130'><p>"+dose1+" "+ingredient1+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img1+"' width='130' height='130'><p>"+ingredient1+"</p></div>");
@@ -97,6 +135,7 @@
                     {
                         if (dose2 != null)
                         {
+                            dose2 = ozToCl(dose2);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img2+"' width='130' height='130'><p>"+dose2+" "+ingredient2+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img2+"' width='130' height='130'><p>"+ingredient2+"</p></div>");
@@ -110,6 +149,7 @@
                     {
                         if (dose3 != null)
                         {
+                            dose3 = ozToCl(dose3);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img3+"' width='130' height='130'><p>"+dose3+" "+ingredient3+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img3+"' width='130' height='130'><p>"+ingredient3+"</p></div>");
@@ -123,6 +163,7 @@
                     {
                         if (dose4 != null)
                         {
+                            dose4 = ozToCl(dose4);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img4+"' width='130' height='130'><p>"+dose4+" "+ingredient4+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img4+"' width='130' height='130'><p>"+ingredient4+"</p></div>");
@@ -136,6 +177,7 @@
                     {
                         if (dose5 != null)
                         {
+                            dose5 = ozToCl(dose5);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img5+"' width='130' height='130'><p>"+dose5+" "+ingredient5+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img5+"' width='130' height='130'><p>"+ingredient5+"</p></div>");
@@ -149,6 +191,7 @@
                     {
                         if (dose6 != null)
                         {
+                            dose6 = ozToCl(dose6);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img6+"' width='130' height='130'><p>"+dose6+" "+ingredient6+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img6+"' width='130' height='130'><p>"+ingredient6+"</p></div>");
@@ -162,6 +205,7 @@
                     {
                         if (dose7 != null)
                         {
+                            dose7 = ozToCl(dose7);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img7+"' width='130' height='130'><p>"+dose7+" "+ingredient7+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img7+"' width='130' height='130'><p>"+ingredient7+"</p></div>");
@@ -175,6 +219,7 @@
                     {
                         if (dose8 != null)
                         {
+                            dose8 = ozToCl(dose8);
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img8+"' width='130' height='130'><p>"+dose8+" "+ingredient8+"</p></div>");
                         } else {
                             $("#ingredients_cocktail").append("<div class='col-md-3'><img src='"+img8+"' width='130' height='130'><p>"+ingredient8+"</p></div>");
@@ -184,6 +229,19 @@
             });
         } else {
             $("#name_cocktail").html('Error. The cocktail details cannot be loaded !')
+        }
+
+        function ozToCl(dose){
+            if (dose.indexOf("oz") >= 0){
+                nums = dose.split(' ')[0];
+                if (dose.split(' ')[0].indexOf('-') >= 0){
+                    dose = parseInt(nums[0]) * 3+'-'+parseInt(nums[2]) * 3+' cl';
+                } else {
+                    num = parseInt(nums) * 3;
+                    dose = num+' cl';
+                }
+            }
+            return dose;
         }
     </script>
 </body>
